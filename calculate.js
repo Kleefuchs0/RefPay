@@ -1,6 +1,19 @@
+function getDataFromVersionSpecificData(versionSpecificData) {
+    switch (versionSpecificData.version) {
+        default:            // Invalid Version, Before Version was included, or v2.4, because that introduced version
+            return {
+                peopleAndKilometerValues: versionSpecificData.peopleAndKilometerValues,
+                eurosPerKilometer: versionSpecificData.eurosPerKilometer,
+                scenario: versionSpecificData.scenario,
+                isJugendspiel: versionSpecificData.isJugendspiel
+            }
+    }
+}
+
 // Berechnung der Ergebnisse
 const params = new URLSearchParams(window.location.search);
-const data = JSON.parse(params.get("data"));
+const versionSpecificData = JSON.parse(params.get("data"));
+const data = versionSpecificData;
 
 const numberOfPeople = data.peopleAndKilometerValues.length;
 const peopleAndKilometerValues = data.peopleAndKilometerValues;
