@@ -45,7 +45,7 @@ document.getElementById('reset').addEventListener('click', function() {
 document.getElementById('berechnen').addEventListener('click', function() {
     const data = {
         version: version,
-        peopleAndKilometerValues: (function() {
+        pkv: (function() {
             const tempKMValues = [];
             for (let i = 1; i <= document.getElementById('crew').value; i++) {
                 const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
@@ -53,9 +53,9 @@ document.getElementById('berechnen').addEventListener('click', function() {
             }
             return tempKMValues;
         })(),
-        scenario: document.getElementById('szenario').value,
-        isJugendspiel: document.getElementById('jugendspiel').checked,
-        eurosPerKilometer: eurosPerKilometer
+        s: document.getElementById('szenario').value,
+        ijs: document.getElementById('jugendspiel').checked,
+        epK: eurosPerKilometer
     }
     var params = new URLSearchParams();
     params.append("data", JSON.stringify(data));

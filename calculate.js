@@ -1,7 +1,16 @@
 function getDataFromVersionSpecificData(versionSpecificData) {
     switch (versionSpecificData.version) {
+        case "v2.5":
+            return {
+                version: versionSpecificData.version,
+                peopleAndKilometerValues: versionSpecificData.pkv,
+                eurosPerKilometer: versionSpecificData.epK,
+                scenario: versionSpecificData.s,
+                isJugendspiel: versionSpecificData.ijs
+            }
         default:            // Invalid Version, Before Version was included, or v2.4, because that introduced version
             return {
+                version: versionSpecificData.version ? versionSpecificData.version : "v0.0",
                 peopleAndKilometerValues: versionSpecificData.peopleAndKilometerValues,
                 eurosPerKilometer: versionSpecificData.eurosPerKilometer,
                 scenario: versionSpecificData.scenario,
@@ -13,7 +22,8 @@ function getDataFromVersionSpecificData(versionSpecificData) {
 // Berechnung der Ergebnisse
 const params = new URLSearchParams(window.location.search);
 const versionSpecificData = JSON.parse(params.get("data"));
-const data = versionSpecificData;
+const data = getDataFromVersionSpecificData(versionSpecificData);
+console.log(data);
 
 const numberOfPeople = data.peopleAndKilometerValues.length;
 const peopleAndKilometerValues = data.peopleAndKilometerValues;
