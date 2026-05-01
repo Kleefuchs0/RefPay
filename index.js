@@ -1,70 +1,11 @@
 const eurosPerKilometer = 0.35;
 
-// Bezeichnungen für die Personen basierend auf Crew-Größe
-function getPersonenBezeichnungen(anzahlPersonen) {
-    switch(anzahlPersonen) {
-        case 3:
-            return {
-                1: "Referee",
-                2: "Linesman", 
-                3: "Backjudge"
-            };
-        case 4:
-            return {
-                1: "Referee",
-                2: "Linesman",
-                3: "Linejudge",
-                4: "Backjudge"
-            };
-        case 5:
-            return {
-                1: "Referee",
-                2: "Umpire",
-                3: "Linesman",
-                4: "Linejudge",
-                5: "Backjudge"
-            };
-        case 7:
-            return {
-                1: "Referee",
-                2: "Umpire",
-                3: "Linesman",
-                4: "Linejudge",
-                5: "Backjudge",
-                6: "Sidejudge",
-                7: "Fieldjudge"
-            };
-        case 8:
-            return {
-                1: "Referee",
-                2: "Umpire",
-                3: "Linesman",
-                4: "Linejudge",
-                5: "Backjudge",
-                6: "Sidejudge",
-                7: "Fieldjudge",
-                8: "Centerjudge"
-            };
-        default:
-            return {
-                1: "Referee",
-                2: "Umpire",
-                3: "Linesman",
-                4: "Linejudge",
-                5: "Backjudge",
-                6: "Sidejudge",
-                7: "Fieldjudge",
-                8: "Centerjudge"
-            };
-    }
-}
-
 // Kilometer-Eingabefelder erstellen
 function createKilometerFields(anzahlPersonen) {
     const kilometerFelder = document.getElementById('kilometer-felder');
     kilometerFelder.innerHTML = '';
 
-    const bezeichnungen = getPersonenBezeichnungen(anzahlPersonen);
+    const bezeichnungen = getCrewDesignations(anzahlPersonen);
 
     for (let i = 1; i <= anzahlPersonen; i++) {
         const container = document.createElement('div');
@@ -100,22 +41,23 @@ document.getElementById('reset').addEventListener('click', function() {
     document.getElementById('jugendspiel').checked = false;
 });
 
+// Collect data for calculation
 document.getElementById('berechnen').addEventListener('click', function() {
-    const anzahlPersonen = parseInt(document.getElementById('crew').value);
-    const kilometerWerte = [];
-    const szenario = document.getElementById('szenario').value;
-    const isJugendspiel = document.getElementById('jugendspiel').checked;
-
-    // Kilometerwerte sammeln
-    for (let i = 1; i <= anzahlPersonen; i++) {
-        const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
-        kilometerWerte.push({ person: i, kilometer });
+    const data = {
+        peopleAndKilometers: (function() {
+            const tempKMValues = [];
+            for (let i = 1; i <= document.getElementById('crew').value; i++) {
+                const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
+                tempKMValues.push({ person: i, kilometer });
+            }
+            return tempKMValues;
+        })(),
+        scenario: document.getElementById('szenario').value,
+        isJugendspiel: document.getElementById('jugendspiel').checked,
+        eurosPerKilometer: eurosPerKilometer
     }
-
+    var params = new URLSearchParams();
+    params.append("data", JSON.stringify(data));
+    const url = "calculate.html?" + params.toString();
+    location.href = url;
 })
-
-// Zurück-Button
-document.getElementById('zurueck').addEventListener('click', function() {
-    document.getElementById('ergebnisseite').style.display = 'none';
-    document.getElementById('startseite').style.display = 'block';
-});
