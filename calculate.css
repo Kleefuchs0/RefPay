@@ -1,0 +1,44 @@
+#ergebnis-tabelle table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#ergebnis-tabelle th, #ergebnis-tabelle td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: left;
+    color: #e0e0e0;
+}
+
+#ergebnis-tabelle th {
+    background-color: #333;
+}
+
+#ergebnis-summary h3 {
+    color: #28a745;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.kosten-tabelle {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.kosten-tabelle td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+.kosten-tabelle tr:last-child {
+    border-top: 2px solid #444;
+}
+
+.gesamtzeile td {
+    font-weight: bold;
+    background-color: #252525;
+}
