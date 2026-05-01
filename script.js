@@ -114,8 +114,11 @@ document.getElementById('berechnen').addEventListener('click', function() {
   // KFZ-Kosten berechnen - 2 Autos für 3er, 4er und 5er Crew, 3 Autos für 7er und 8er Crew
   const anzahlAutos = (anzahlPersonen <= 5) ? 2 : 3;
   const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
+console.log(topFahrer);
   const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-  const gesamtkostenKFZ = (gesamtKilometer * 0.35).toPrecision(15);
+  // Apply correction factor
+  const gesamtkostenKFZ = ((gesamtKilometer * 100) * (0.35) * 100);
+  gesamtkostenKFZ /= 10000;
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
 
   // Anzahl der Personen mit Kilometer > 0
@@ -131,12 +134,14 @@ document.getElementById('berechnen').addEventListener('click', function() {
       betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * 0.35) : 0
     }));
   } else {
+      console.log(gesamtkostenKFZ);
     // Normale Berechnung mit Rundung
     betraege = kilometerWerte.map(fahrer => ({
       person: fahrer.person,
       kilometer: fahrer.kilometer,
       betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkostenKFZ)
     }));
+    console.log(betraege);
 
     const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
     const restbetrag = gesamtkostenKFZ - summeAbgerundet;
