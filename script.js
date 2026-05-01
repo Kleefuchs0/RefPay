@@ -228,24 +228,3 @@ document.getElementById('zurueck').addEventListener('click', function() {
   document.getElementById('ergebnisseite').style.display = 'none';
   document.getElementById('startseite').style.display = 'block';
 });
-
-// Impressum-Links
-document.getElementById('impressum-link').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('startseite').style.display = 'none';
-  document.getElementById('ergebnisseite').style.display = 'none';
-  document.getElementById('impressum-page').style.display = 'block';
-});
-
-document.getElementById('impressum-link-ergebnis').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('startseite').style.display = 'none';
-  document.getElementById('ergebnisseite').style.display = 'none';
-  document.getElementById('impressum-page').style.display = 'block';
-});
-
-// Zurück-Button Impressum
-document.getElementById('zurueck-impressum').addEventListener('click', function() {
-  document.getElementById('impressum-page').style.display = 'none';
-  document.getElementById('startseite').style.display = 'block';
-});
