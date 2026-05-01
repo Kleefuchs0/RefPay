@@ -44,7 +44,7 @@ document.getElementById('reset').addEventListener('click', function() {
 // Collect data for calculation
 document.getElementById('berechnen').addEventListener('click', function() {
     const data = {
-        peopleAndKilometers: (function() {
+        peopleAndKilometerValues: (function() {
             const tempKMValues = [];
             for (let i = 1; i <= document.getElementById('crew').value; i++) {
                 const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
