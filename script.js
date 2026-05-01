@@ -115,7 +115,7 @@ document.getElementById('berechnen').addEventListener('click', function() {
   const anzahlAutos = (anzahlPersonen <= 5) ? 2 : 3;
   const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
   const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-  const gesamtkostenKFZ = gesamtKilometer * 0.35;
+  const gesamtkostenKFZ = (gesamtKilometer * 0.35).toPrecision(15);
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
 
   // Anzahl der Personen mit Kilometer > 0
