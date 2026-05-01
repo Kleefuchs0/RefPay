@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RefPay</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RefPay</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
 
-  <!-- Startseite -->
-  <div id="startseite" class="container">
-    <div class="logo-container">
-      <img src="logo.png" alt="RefPay Logo" class="logo">
-    </div>
+        <!-- Startseite -->
+        <div id="startseite" class="container">
+            <div class="logo-container">
+                <img src="logo.png" alt="RefPay Logo" class="logo">
+            </div>
 
-    <label for="crew">Schiedsrichter-Crew:</label>
-    <select id="crew">
-      <option value="3">3er Crew</option>
-      <option value="4">4er Crew</option>
-      <option value="5" selected>5er Crew</option>
-      <option value="7">7er Crew</option>
-      <option value="8">8er Crew</option>
-    </select>
+            <label for="crew">Schiedsrichter-Crew:</label>
+            <select id="crew">
+                <option value="3">3er Crew</option>
+                <option value="4">4er Crew</option>
+                <option value="5" selected>5er Crew</option>
+                <option value="7">7er Crew</option>
+                <option value="8">8er Crew</option>
+            </select>
 
-    <label for="szenario">Abrechnungsszenario:</label>
-    <select id="szenario">
-      <option value="einzelspiel" selected>1 Spiel (Ref: 70€, andere: 60€)</option>
-      <option value="turnier6">Turnier (bis 6 Halbzeiten, alle 70€)</option>
-      <option value="turnier6plus">Turnier (mehr als 6 Halbzeiten, alle 90€)</option>
-    </select>
+            <label for="szenario">Abrechnungsszenario:</label>
+            <select id="szenario">
+                <option value="einzelspiel" selected>1 Spiel (Ref: 70€, andere: 60€)</option>
+                <option value="turnier6">Turnier (bis 6 Halbzeiten, alle 70€)</option>
+                <option value="turnier6plus">Turnier (mehr als 6 Halbzeiten, alle 90€)</option>
+            </select>
 
-    <label class="checkbox-label">
-      <input type="checkbox" id="jugendspiel"> Jugendspiel - Double Header (+25€ pro Person)
-    </label>
+            <label class="checkbox-label">
+                <input type="checkbox" id="jugendspiel"> Jugendspiel - Double Header (+25€ pro Person)
+            </label>
 
-    <div id="kilometer-felder"></div>
+            <div id="kilometer-felder"></div>
 
-    <button id="berechnen">Berechnen</button>
-    <button id="reset">Reset</button>
+            <button id="berechnen">Berechnen</button>
+            <button id="reset">Reset</button>
 
-    <div class="container-footer">
-      <a href="imprint.html" id="impressum-link">Impressum</a>
-      <span class="version">RefPay v2.2</span>
-    </div>
-  </div>
+            <div class="container-footer">
+                <a href="imprint.html" id="impressum-link">Impressum</a>
+                <span class="version">RefPay v2.2</span>
+            </div>
+        </div>
 
-  <script src="index.js"></script>
-</body>
+        <script src="index.js"></script>
+    </body>
 </html>
