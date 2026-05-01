@@ -10,6 +10,7 @@
   - Turnier bis 6 Halbzeiten (alle 70€)
   - Turnier über 6 Halbzeiten (alle 90€)
 - Zuschlag für Jugendspiel/Double Header (+25€ pro Person)
+- Einfaches teilen von Ergebnissen
 
 ## Bedienung
 1. Crew-Größe auswählen (3er, 4er, 5er, 7er oder 8er)

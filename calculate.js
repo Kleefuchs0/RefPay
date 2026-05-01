@@ -140,6 +140,6 @@ document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspie
 document.getElementById('gesamtbetrag').textContent = `${totalAmounts.toFixed(2)} €`;
 
 
-document.getElementById('share').addEventListener('click', function() {
+document.getElementById('copy-clipboard').addEventListener('click', function() {
     copyTextToClipboard(location.href);
 });
