@@ -8,7 +8,6 @@ const eurosPerKilometer = data.eurosPerKilometer;
 const scenario = data.scenario;
 const isJugendspiel = data.isJugendspiel;
 
-console.log(data);
 // KFZ-Kosten berechnen - 2 Autos für 3er, 4er und 5er Crew, 3 Autos für 7er und 8er Crew
 const carCount = (numberOfPeople <= 5) ? 2 : 3;
 const topDriver = [...peopleAndKilometerValues].sort((a, b) => b.kilometer - a.kilometer).slice(0, carCount);
@@ -117,3 +116,7 @@ document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspie
 // Gesamtbetrag anzeigen
 document.getElementById('gesamtbetrag').textContent = `${totalAmounts.toFixed(2)} €`;
 
+
+document.getElementById('share').addEventListener('click', function() {
+    copyTextToClipboard(location.href);
+});
