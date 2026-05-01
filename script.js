@@ -1,3 +1,5 @@
+const eurosPerKilometer = 0.35;
+
 // Bezeichnungen für die Personen basierend auf Crew-Größe
 function getPersonenBezeichnungen(anzahlPersonen) {
   switch(anzahlPersonen) {
@@ -116,7 +118,7 @@ document.getElementById('berechnen').addEventListener('click', function() {
   const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
   const gesamtKilometerTopFahrer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
   // Apply correction factor. So calculation happens between ints and not floating point numbers.
-  const gesamtkostenKFZ = ((gesamtKilometerTopFahrer * 100) * (0.35) * 100) / 10000;
+  const gesamtkostenKFZ = ((gesamtKilometerTopFahrer) * (eurosPerKilometer) * 100) / 100;
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
 
   // Anzahl der Personen mit Kilometer > 0
@@ -129,7 +131,7 @@ document.getElementById('berechnen').addEventListener('click', function() {
     betraege = kilometerWerte.map(fahrer => ({
       person: fahrer.person,
       kilometer: fahrer.kilometer,
-      betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * 0.35) : 0
+      betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * (eurosPerKilometer * 100)) / 100 : 0
     }));
   } else {
     // Normale Berechnung mit Rundung
@@ -208,9 +210,9 @@ document.getElementById('berechnen').addEventListener('click', function() {
   document.getElementById('gesamt-sr-anzahl').textContent = anzahlPersonen;
 
   // KFZ-Kosten in Tabelle eintragen
-  document.getElementById('auto1-kosten').textContent = topFahrer[0] ? `${(topFahrer[0].kilometer * 0.35).toFixed(2)} €` : "0.00 €";
-  document.getElementById('auto2-kosten').textContent = topFahrer[1] ? `${(topFahrer[1].kilometer * 0.35).toFixed(2)} €` : "0.00 €";
-  document.getElementById('auto3-kosten').textContent = topFahrer[2] ? `${(topFahrer[2].kilometer * 0.35).toFixed(2)} €` : "-";
+  document.getElementById('auto1-kosten').textContent = topFahrer[0] ? `${(topFahrer[0].kilometer * eurosPerKilometer).toFixed(2)} €` : "0.00 €";
+  document.getElementById('auto2-kosten').textContent = topFahrer[1] ? `${(topFahrer[1].kilometer * eurosPerKilometer).toFixed(2)} €` : "0.00 €";
+  document.getElementById('auto3-kosten').textContent = topFahrer[2] ? `${(topFahrer[2].kilometer * eurosPerKilometer).toFixed(2)} €` : "-";
 
   // Aufwandsentschädigungen in Tabelle eintragen
   document.getElementById('referee-entschaedigung').textContent = `${refereeEntschaedigung.toFixed(2)} €`;
