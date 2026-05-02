@@ -70,5 +70,5 @@ function getExportDataFromVersionSpecificExportData(versionSpecificExportData) {
 }
 
 function createVersionSpecificExportDataFromExportData(edata) {
-    return createVersionSpecificExportData(edata.version, edata.amounts, edata.scenario, edata.isJugendspiel, edata.refereeCompensation, edata.otherCompensation, edata.jugendspielCompensation);
+    return createVersionSpecificExportData(edata.version, edata.amounts, edata.topDriver, edata.eurosPerKilometer, edata.totalAmounts, edata.scenario, edata.isJugendspiel, edata.refereeCompensation, edata.otherCompensation, edata.jugendspielCompensation);
 }

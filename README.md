@@ -34,3 +34,7 @@ Die Berechnung zeigt:
 ## Systemvoraussetzungen
 - Moderner Browser (Chrome, Firefox, Edge)
 - Internetverbindung
+
+## Momentaner Zustand:
+- Es funktioniert
+- Muss aber unbedingt nochmal aufgeräumt werden. (Warscheinlich nachdem alle Features implementiert sind)
