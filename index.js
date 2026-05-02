@@ -48,8 +48,8 @@ document.getElementById('berechnen').addEventListener('click', function() {
         pkv: (function() {
             const tempKMValues = [];
             for (let i = 1; i <= document.getElementById('crew').value; i++) {
-                const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
-                tempKMValues.push({ person: i, kilometer });
+                const k = parseFloat(document.getElementById(`person-${i}`).value) || 0;
+                tempKMValues.push({ p: i, k });
             }
             return tempKMValues;
         })(),
