@@ -181,17 +181,7 @@ document.getElementById('copy-clipboard').addEventListener('click', function() {
 
 // Collect data for exporting
 document.getElementById('export').addEventListener('click', function() {
-    const edata = {
-        ver: dataVersion,
-        b64d: btoa(JSON.stringify({
-            a: amounts,
-            s: scenario,
-            ijs: isJugendspiel,
-            rC: refereeCompensation,
-            oC: otherCompensation,
-            jC: jugendspielCompensation,
-        }))
-    }
+    const edata = createVersionSpecificExportData(dataVersion, amounts, scenario, isJugendspiel, refereeCompensation, otherCompensation, jugendspielCompensation)
     var params = new URLSearchParams();
     params.append("edata", JSON.stringify(edata));
     const url = "export.html?" + params.toString();
