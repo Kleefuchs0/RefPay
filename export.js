@@ -55,6 +55,7 @@ document.getElementById('copy-clipboard').addEventListener('click', function() {
     const versionSpecificExportData = createVersionSpecificExportDataFromExportData(edata)
     var params = new URLSearchParams();
     params.append("edata", JSON.stringify(versionSpecificExportData));
-    const url = window.location.host + "/export.html?" + params.toString();
+    const origin = window.location.origin.replace(domain, domain + "/" + repositoryName);
+    const url = origin + "/export.html?" + params.toString();
     copyTextToClipboard(url);
 });
