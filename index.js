@@ -45,17 +45,19 @@ document.getElementById('reset').addEventListener('click', function() {
 document.getElementById('berechnen').addEventListener('click', function() {
     const data = {
         version: version,
-        pkv: (function() {
-            const tempKMValues = [];
-            for (let i = 1; i <= document.getElementById('crew').value; i++) {
-                const k = parseFloat(document.getElementById(`person-${i}`).value) || 0;
-                tempKMValues.push({ p: i, k });
-            }
-            return tempKMValues;
-        })(),
-        s: document.getElementById('szenario').value,
-        ijs: document.getElementById('jugendspiel').checked,
-        epK: eurosPerKilometer
+        b64d: btoa(JSON.stringify({
+            pkv: (function() {
+                const tempKMValues = [];
+                for (let i = 1; i <= document.getElementById('crew').value; i++) {
+                    const k = parseFloat(document.getElementById(`person-${i}`).value) || 0;
+                    tempKMValues.push({ p: i, k });
+                }
+                return tempKMValues;
+            })(),
+            s: document.getElementById('szenario').value,
+            ijs: document.getElementById('jugendspiel').checked,
+            epK: eurosPerKilometer
+        }))
     }
     var params = new URLSearchParams();
     params.append("data", JSON.stringify(data));

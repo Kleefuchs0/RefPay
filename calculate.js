@@ -1,5 +1,20 @@
 function getDataFromVersionSpecificData(versionSpecificData) {
     switch (versionSpecificData.version) {
+        case "v2.6.1":
+            const d = JSON.parse(atob(versionSpecificData.b64d));
+            return {
+                version: versionSpecificData.version,
+                peopleAndKilometerValues: (function() {
+                    const tempKMValues = [];
+                    d.pkv.forEach(function(valuePair) {
+                        tempKMValues.push({ person: valuePair.p, kilometer: valuePair.k});
+                    })
+                    return tempKMValues;
+                })(),
+                eurosPerKilometer: d.epK,
+                scenario: d.s,
+                isJugendspiel: d.ijs
+            }
         case "v2.6":
             return {
                 version: versionSpecificData.version,
