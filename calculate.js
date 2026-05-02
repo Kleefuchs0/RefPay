@@ -76,8 +76,8 @@ let amounts;
 if (activePeople <= carCount) {
     amounts = peopleAndKilometerValues.map(fahrer => ({
         person: fahrer.person,
-        name: "",
-        lastName: "",
+        fname: "",
+        lname: "",
         departurePoint: "",
         kilometer: fahrer.kilometer,
         betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * (eurosPerKilometer * 100)) / 100 : 0
@@ -86,8 +86,8 @@ if (activePeople <= carCount) {
     // Normale Berechnung mit Rundung
     amounts = peopleAndKilometerValues.map(fahrer => ({
         person: fahrer.person,
-        name: "",
-        lastName: "",
+        fname: "",
+        lname: "",
         departurePoint: "",
         kilometer: fahrer.kilometer,
         // Also apply correction factor

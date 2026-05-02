@@ -1,9 +1,9 @@
 
 const params = new URLSearchParams(window.location.search);
 const versionSpecificExportData = JSON.parse(params.get("edata"));
-const edata = getExportDataFromVersionSpecificExportData(versionSpecificExportData);
+let edata = getExportDataFromVersionSpecificExportData(versionSpecificExportData);
+console.log(edata);
 
-amounts = edata.amounts;
 const numberOfPeople = edata.amounts.length;
 const designations = getCrewDesignations(numberOfPeople);
 
@@ -20,10 +20,10 @@ function updateTable() {
         <th>Pauschale</th>
         <th>Unterschrift</th>
       </tr>
-      ${amounts.map(fahrer => `
+      ${edata.amounts.map(fahrer => `
         <tr>
-          <td><input type="text" id="fname-${fahrer.person}" name="fname" value="${fahrer.name}"></td>
-          <td><input type="text" id="lname-${fahrer.person}" name="lname" value="${fahrer.lastName}"></td>
+          <td><input type="text" id="fname-${fahrer.person}" name="fname" value="${fahrer.fname}"></td>
+          <td><input type="text" id="lname-${fahrer.person}" name="lname" value="${fahrer.lname}"></td>
           <td><input type="text" id="departurePoint-${fahrer.person}" name="departurePoint" value="${fahrer.departurePoint}"></td>
           <td>${designations[fahrer.person]}</td>
           <td>${fahrer.kilometer} km</td>
@@ -42,14 +42,21 @@ window.addEventListener('load', function() {
     updateTable();
     for (let i = 0; i < numberOfPeople; i++) {
         document.getElementById(`fname-${i + 1}`).addEventListener("change", function() {
-            amounts[i].fname = document.getElementById(`fname-${i + 1}`).value;
+            edata.amounts[i].fname = document.getElementById(`fname-${i + 1}`).value;
         })
         document.getElementById(`lname-${i + 1}`).addEventListener("change", function() {
-            amounts[i].lname = document.getElementById(`lname-${i + 1}`).value;
+            edata.amounts[i].lname = document.getElementById(`lname-${i + 1}`).value;
         })
         document.getElementById(`departurePoint-${i + 1}`).addEventListener("change", function() {
-            amounts[i].lname = document.getElementById(`departurePoint-${i + 1}`).value;
+            edata.amounts[i].departurePoint = document.getElementById(`departurePoint-${i + 1}`).value;
         })
     }
 });
 
+document.getElementById('copy-clipboard').addEventListener('click', function() {
+    const versionSpecificExportData = createVersionSpecificExportDataFromExportData(edata)
+    var params = new URLSearchParams();
+    params.append("edata", JSON.stringify(versionSpecificExportData));
+    const url = window.location.host + "/export.html?" + params.toString();
+    copyTextToClipboard(url);
+});

@@ -1,5 +1,5 @@
 function createVersionSpecificExportData(dataVersion, amounts, scenario, isJugendspiel, refereeCompensation, otherCompensation, jugendspielCompensation) {
-    const edata = {
+    const vsedata = {
         ver: dataVersion,
         b64d: btoa(JSON.stringify({
             a: amounts,
@@ -10,7 +10,8 @@ function createVersionSpecificExportData(dataVersion, amounts, scenario, isJugen
             jC: jugendspielCompensation,
         }))
     }
-    return edata;
+    console.log(vsedata);
+    return vsedata;
 }
 
 function getExportDataFromVersionSpecificExportData(versionSpecificExportData) {
@@ -27,4 +28,8 @@ function getExportDataFromVersionSpecificExportData(versionSpecificExportData) {
                 jugendspielCompensation: ed.jC,
             }
     }
+}
+
+function createVersionSpecificExportDataFromExportData(edata) {
+    return createVersionSpecificExportData(edata.version, edata.amounts, edata.scenario, edata.isJugendspiel, edata.refereeCompensation, edata.otherCompensation, edata.jugendspielCompensation);
 }
