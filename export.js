@@ -18,7 +18,6 @@ function updateTable() {
         <th>Kilometer</th>
         <th>KFZ-Erstattung</th>
         <th>Pauschale</th>
-        <th>Unterschrift</th>
       </tr>
       ${edata.amounts.map(fahrer => `
         <tr>
@@ -29,7 +28,6 @@ function updateTable() {
           <td>${fahrer.kilometer} km</td>
           <td>${fahrer.betrag.toFixed(2)} €</td>
           <td>${(fahrer.person==1) ? edata.jugendspielCompensation + edata.refereeCompensation : edata.jugendspielCompensation + edata.otherCompensation} €</td>
-          <td></td>
         </tr>
       `).join('')}
     </table>
