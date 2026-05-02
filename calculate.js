@@ -169,7 +169,7 @@ document.getElementById('auto3-kosten').textContent = topDriver[2] ? `${(topDriv
 // Aufwandsentschädigungen in Tabelle eintragen
 document.getElementById('referee-entschaedigung').textContent = `${refereeCompensation.toFixed(2)} €`;
 document.getElementById('andere-entschaedigung').textContent = `${(otherCompensation * (numberOfPeople - 1)).toFixed(2)} €`;
-document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspiel ? `${(jugendspielCompensation * (numberOfPeople -1)).toFixed(2)} €` : "-";
+document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspiel ? `${(jugendspielCompensation * numberOfPeople).toFixed(2)} €` : "-";
 
 // Gesamtbetrag anzeigen
 document.getElementById('gesamtbetrag').textContent = `${totalAmounts.toFixed(2)} €`;
