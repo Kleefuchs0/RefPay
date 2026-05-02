@@ -26,6 +26,11 @@ Die Berechnung zeigt:
 - Jugendspiel-Zuschlag (falls aktiviert)
 - Gesamtbetrag aller Positionen
 
+## Erstellen einer Schiedrichterquittung
+- Work in Progress:
+  - Editor angefangen, aber nicht fertig.
+  - Teilen ist möglich.
+
 ## Systemvoraussetzungen
 - Moderner Browser (Chrome, Firefox, Edge)
-- Internetverbindung (nur für erste Ladung)
+- Internetverbindung
