@@ -74,6 +74,10 @@ button:hover {
     background-color: #218838;
 }
 
+button:active {
+    background-color: #38b755;
+}
+
 .checkbox-label {
     display: flex;
     align-items: center;

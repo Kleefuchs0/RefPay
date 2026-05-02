@@ -44,7 +44,7 @@ document.getElementById('reset').addEventListener('click', function() {
 // Collect data for calculation
 document.getElementById('berechnen').addEventListener('click', function() {
     const data = {
-        version: version,
+        version: dataVersion,
         b64d: btoa(JSON.stringify({
             pkv: (function() {
                 const tempKMValues = [];

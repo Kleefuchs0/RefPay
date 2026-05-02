@@ -52,7 +52,6 @@ function getDataFromVersionSpecificData(versionSpecificData) {
 const params = new URLSearchParams(window.location.search);
 const versionSpecificData = JSON.parse(params.get("data"));
 const data = getDataFromVersionSpecificData(versionSpecificData);
-console.log(data);
 
 const numberOfPeople = data.peopleAndKilometerValues.length;
 const peopleAndKilometerValues = data.peopleAndKilometerValues;
@@ -88,6 +87,7 @@ if (activePeople <= carCount) {
         // Also apply correction factor
         betrag: Math.floor((fahrer.kilometer / totalDrivenKilometers) * 100 * totalCostKFZ * 100) / 10000
     }));
+    console.log(amounts);
 
     const summeAbgerundet = amounts.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
     const restbetrag = totalCostKFZ - summeAbgerundet;
@@ -172,3 +172,22 @@ document.getElementById('gesamtbetrag').textContent = `${totalAmounts.toFixed(2)
 document.getElementById('copy-clipboard').addEventListener('click', function() {
     copyTextToClipboard(location.href);
 });
+
+// Collect data for exporting
+document.getElementById('export').addEventListener('click', function() {
+    const edata = {
+        ver: dataVersion,
+        b64d: btoa(JSON.stringify({
+            a: amounts,
+            s: scenario,
+            ijs: isJugendspiel,
+            rC: refereeCompensation,
+            oC: otherCompensation,
+            jC: jugendspielCompensation,
+        }))
+    }
+    var params = new URLSearchParams();
+    params.append("edata", JSON.stringify(edata));
+    const url = "export.html?" + params.toString();
+    location.href = url;
+})
