@@ -57,7 +57,7 @@ window.addEventListener('load', function() {
     // Aufwandsentschädigungen in Tabelle eintragen
     document.getElementById('referee-entschaedigung').textContent = `${edata.refereeCompensation.toFixed(2)} €`;
     document.getElementById('andere-entschaedigung').textContent = `${(edata.otherCompensation * (numberOfPeople - 1)).toFixed(2)} €`;
-    document.getElementById('jugendspiel-entschaedigung').textContent = edata.isJugendspiel ? `${(edata.jugendspielCompensation * (numberOfPeople - 1)).toFixed(2)} €` : "-";
+    document.getElementById('jugendspiel-entschaedigung').textContent = edata.isJugendspiel ? `${(edata.jugendspielCompensation * numberOfPeople).toFixed(2)} €` : "-";
 
     // Gesamtbetrag anzeigen
     document.getElementById('gesamtbetrag').textContent = `${edata.totalAmounts.toFixed(2)} €`;
