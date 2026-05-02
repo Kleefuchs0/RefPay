@@ -32,6 +32,8 @@ function updateTable() {
         <th>Position</th>
         <th>Kilometer</th>
         <th>KFZ-Erstattung</th>
+        <th>Pauschale</th>
+        <th>Unterschrift</th>
       </tr>
       ${amounts.map(fahrer => `
         <tr>
@@ -40,7 +42,9 @@ function updateTable() {
           <td><input type="text" id="departurePoint-${fahrer.person}" name="departurePoint" value="${fahrer.departurePoint}"></td>
           <td>${designations[fahrer.person]}</td>
           <td>${fahrer.kilometer} km</td>
-          <td>${amounts.find(b => b.person === fahrer.person).betrag.toFixed(2)} €</td>
+          <td>${fahrer.betrag.toFixed(2)} €</td>
+          <td>${(fahrer.person==1) ? edata.jugendspielCompensation + edata.refereeCompensation : edata.jugendspielCompensation + edata.otherCompensation} €</td>
+          <td></td>
         </tr>
       `).join('')}
     </table>
@@ -48,16 +52,19 @@ function updateTable() {
     document.getElementById('ergebnis-tabelle').innerHTML = table;
 }
 
-updateTable();
+// Create table
+window.addEventListener('load', function() {
+    updateTable();
+    for (let i = 0; i < numberOfPeople; i++) {
+        document.getElementById(`fname-${i + 1}`).addEventListener("change", function() {
+            amounts[i].fname = document.getElementById(`fname-${i + 1}`).value;
+        })
+        document.getElementById(`lname-${i + 1}`).addEventListener("change", function() {
+            amounts[i].lname = document.getElementById(`lname-${i + 1}`).value;
+        })
+        document.getElementById(`departurePoint-${i + 1}`).addEventListener("change", function() {
+            amounts[i].lname = document.getElementById(`departurePoint-${i + 1}`).value;
+        })
+    }
+});
 
-for (let i = 0; i < numberOfPeople; i++) {
-    document.getElementById(`fname-${i+1}`).addEventListener("change", function() {
-        amounts[i].fname = document.getElementById(`fname-${i+1}`).value;
-    })
-    document.getElementById(`lname-${i+1}`).addEventListener("change", function() {
-        amounts[i].lname = document.getElementById(`lname-${i+1}`).value;
-    })
-    document.getElementById(`departurePoint-${i+1}`).addEventListener("change", function() {
-        amounts[i].lname = document.getElementById(`departurePoint-${i+1}`).value;
-    })
-}

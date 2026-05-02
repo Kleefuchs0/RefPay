@@ -111,25 +111,25 @@ if (activePeople <= carCount) {
 // Aufwandsentschädigungen berechnen
 let refereeCompensation = 0;
 let otherCompensation = 0;
-let jugendspielCompensation = isJugendspiel ? 25 * numberOfPeople : 0;
+let jugendspielCompensation = isJugendspiel ? 25 : 0;
 
 switch (scenario) {
     case 'einzelspiel':
         refereeCompensation = 70;
-        otherCompensation = 60 * (numberOfPeople - 1);
+        otherCompensation = 60;
         break;
     case 'turnier6':
         refereeCompensation = 70;
-        otherCompensation = 70 * (numberOfPeople - 1);
+        otherCompensation = 70;
         break;
     case 'turnier6plus':
         refereeCompensation = 90;
-        otherCompensation = 90 * (numberOfPeople - 1);
+        otherCompensation = 90;
         break;
 }
 
 // Gesamtbetrag berechnen
-const totalAmounts = refereeCompensation + otherCompensation + jugendspielCompensation + totalCostKFZ;
+const totalAmounts = refereeCompensation + otherCompensation * (numberOfPeople - 1) + jugendspielCompensation * numberOfPeople + totalCostKFZ;
 
 // Ergebnisse anzeigen
 document.getElementById('ergebnisseite').style.display = 'block';
@@ -154,6 +154,7 @@ const tabelle = `
       `).join('')}
     </table>
   `;
+
 document.getElementById('ergebnis-tabelle').innerHTML = tabelle;
 
 // Schiedsrichter Anzahl anzeigen
@@ -167,8 +168,8 @@ document.getElementById('auto3-kosten').textContent = topDriver[2] ? `${(topDriv
 
 // Aufwandsentschädigungen in Tabelle eintragen
 document.getElementById('referee-entschaedigung').textContent = `${refereeCompensation.toFixed(2)} €`;
-document.getElementById('andere-entschaedigung').textContent = `${otherCompensation.toFixed(2)} €`;
-document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspiel ? `${jugendspielCompensation.toFixed(2)} €` : "-";
+document.getElementById('andere-entschaedigung').textContent = `${(otherCompensation * (numberOfPeople - 1)).toFixed(2)} €`;
+document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspiel ? `${(jugendspielCompensation * (numberOfPeople -1)).toFixed(2)} €` : "-";
 
 // Gesamtbetrag anzeigen
 document.getElementById('gesamtbetrag').textContent = `${totalAmounts.toFixed(2)} €`;
