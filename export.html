@@ -10,7 +10,42 @@
         <div id="startseite">
             <div id="ergebnis-tabelle"></div>
             <button id="export">Export</button>
+            <button id="round-kfz">KFZ-Erstattungen Runden</button>
             <button id="copy-clipboard">Kopiere in Ablage</button>
+
+            <div id="ergebnis-summary">
+                <h3>Aufwandsentschädigung</h3>
+                <table class="kosten-tabelle">
+                    <tr>
+                        <td>Referee</td>
+                        <td id="referee-entschaedigung">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Schiedsrichter (Anzahl: <span id="andere-sr-anzahl">0</span>)</td>
+                        <td id="andere-entschaedigung">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 1</td>
+                        <td id="auto1-kosten">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 2</td>
+                        <td id="auto2-kosten">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 3</td>
+                        <td id="auto3-kosten">-</td>
+                    </tr>
+                    <tr>
+                        <td>Jugendspiel Schiedsrichter (Anzahl: <span id="gesamt-sr-anzahl">0</span>)</td>
+                        <td id="jugendspiel-entschaedigung">-</td>
+                    </tr>
+                    <tr class="gesamtzeile">
+                        <td><strong>Gesamtbetrag</strong></td>
+                        <td id="gesamtbetrag">0.00 €</td>
+                    </tr>
+                </table>
+            </div>
 
             <div class="container-footer" name="imprint">
                 <a href="imprint.html" id="impressum-link">Impressum</a>

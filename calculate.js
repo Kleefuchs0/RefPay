@@ -76,22 +76,16 @@ let amounts;
 if (activePeople <= carCount) {
     amounts = peopleAndKilometerValues.map(fahrer => ({
         person: fahrer.person,
-        fname: "",
-        lname: "",
-        departurePoint: "",
         kilometer: fahrer.kilometer,
-        betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * (eurosPerKilometer * 100)) / 100 : 0
+        betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * (eurosPerKilometer * 100)) / 100 : 0,
     }));
 } else {
     // Normale Berechnung mit Rundung
     amounts = peopleAndKilometerValues.map(fahrer => ({
         person: fahrer.person,
-        fname: "",
-        lname: "",
-        departurePoint: "",
         kilometer: fahrer.kilometer,
         // Also apply correction factor
-        betrag: Math.floor((fahrer.kilometer / totalDrivenKilometers) * 100 * totalCostKFZ * 100) / 10000
+        betrag: Math.floor((fahrer.kilometer / totalDrivenKilometers) * 100 * totalCostKFZ * 100) / 10000,
     }));
 
     const summeAbgerundet = amounts.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
@@ -181,7 +175,7 @@ document.getElementById('copy-clipboard').addEventListener('click', function() {
 
 // Collect data for exporting
 document.getElementById('export').addEventListener('click', function() {
-    const edata = createVersionSpecificExportData(dataVersion, amounts, scenario, isJugendspiel, refereeCompensation, otherCompensation, jugendspielCompensation)
+    const edata = createVersionSpecificExportData(eDataVersion, amounts, topDriver, eurosPerKilometer, totalAmounts, scenario, isJugendspiel, refereeCompensation, otherCompensation, jugendspielCompensation)
     var params = new URLSearchParams();
     params.append("edata", JSON.stringify(edata));
     const url = "export.html?" + params.toString();

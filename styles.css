@@ -47,8 +47,6 @@ label {
 
 select, input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #444;
     border-radius: 4px;
     background-color: #333;
@@ -144,3 +142,24 @@ button:active {
     background-color: #333;
 }
 
+
+.kosten-tabelle {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.kosten-tabelle td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+.kosten-tabelle tr:last-child {
+    border-top: 2px solid #444;
+}
+
+.gesamtzeile td {
+    font-weight: bold;
+    background-color: #252525;
+}
