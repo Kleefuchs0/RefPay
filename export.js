@@ -55,7 +55,7 @@ document.getElementById('copy-clipboard').addEventListener('click', function() {
     const versionSpecificExportData = createVersionSpecificExportDataFromExportData(edata)
     var params = new URLSearchParams();
     params.append("edata", JSON.stringify(versionSpecificExportData));
-    const origin = window.location.origin.replace(domain, domain + "/" + repositoryName);
+    const origin = window.location.origin.replace(domain, domain + "/" + repositoryName);           // Only replaces it when hosted on github pages. So I can still localy debug
     const url = origin + "/export.html?" + params.toString();
     copyTextToClipboard(url);
 });
