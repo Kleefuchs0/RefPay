@@ -141,9 +141,9 @@ document.getElementById('andere-sr-anzahl').textContent = numberOfPeople - 1;
 document.getElementById('gesamt-sr-anzahl').textContent = numberOfPeople;
 
 // KFZ-Kosten in Tabelle eintragen
-document.getElementById('auto1-kosten').textContent = topDriver[0] ? `${(topDriver[0].kilometer * eurosPerKilometer).toFixed(2)} €` : "0.00 €";
-document.getElementById('auto2-kosten').textContent = topDriver[1] ? `${(topDriver[1].kilometer * eurosPerKilometer).toFixed(2)} €` : "0.00 €";
-document.getElementById('auto3-kosten').textContent = topDriver[2] ? `${(topDriver[2].kilometer * eurosPerKilometer).toFixed(2)} €` : "-";
+document.getElementById('auto1-kosten').textContent = topDriver[0] ? `${(topDriver[0].kilometer * (eurosPerKilometer * 100) / 100).toFixed(2)} €` : "0.00 €";
+document.getElementById('auto2-kosten').textContent = topDriver[1] ? `${(topDriver[1].kilometer * (eurosPerKilometer * 100) / 100).toFixed(2)} €` : "0.00 €";
+document.getElementById('auto3-kosten').textContent = topDriver[2] ? `${(topDriver[2].kilometer * (eurosPerKilometer * 100) / 100).toFixed(2)} €` : "-";
 
 // Aufwandsentschädigungen in Tabelle eintragen
 document.getElementById('referee-entschaedigung').textContent = `${refereeCompensation.toFixed(2)} €`;
