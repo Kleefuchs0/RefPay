@@ -11,6 +11,7 @@
   - Turnier über 6 Halbzeiten (alle 90€)
 - Zuschlag für Jugendspiel/Double Header (+25€ pro Person)
 - Einfaches teilen von Ergebnissen
+- Live Berechung der Ergebnisse
 
 ## Bedienung
 1. Crew-Größe auswählen (3er, 4er, 5er, 7er oder 8er)
@@ -26,11 +27,7 @@ Die Berechnung zeigt:
 - Jugendspiel-Zuschlag (falls aktiviert)
 - Gesamtbetrag aller Positionen
 
-## Erstellen einer Schiedrichterquittung
-- Work in Progress:
-  - Editor angefangen, aber nicht fertig.
-  - Teilen ist möglich.
-
 ## Systemvoraussetzungen
 - Moderner Browser (Chrome, Firefox, Edge)
 - Internetverbindung
+
