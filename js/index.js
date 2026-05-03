@@ -16,12 +16,21 @@ function evaluateCompensations(data) {
     data.evaluated.compensations.jugendspiel = data.settings.isJugendSpiel ? 25 : 0;
 }
 
+function getTopDrivers(crewSize, people) {
+    const carCount = (crewSize <= 5) ? 2 : 3;
+    return [...people].sort((a, b) => b.kilometer - a.kilometer).slice(0, carCount);
+}
+
+function getTotalKilometersTopDrivers(topDrivers) {
+    return topDrivers.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
+}
+
 function calculateResultingValues(data) {
-    const carCount = (data.settings.crewSize <= 5) ? 2 : 3;
     const totalDrivenKilometers = data.resulting.people.reduce((sum, person) => sum + person.kilometer, 0);
-    const topDrivers = [...data.resulting.people].sort((a, b) => b.kilometer - a.kilometer).slice(0, carCount);
-    const totalKilometersTopDrivers = topDrivers.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
+    const topDrivers = getTopDrivers(data.settings.crewSize, data.resulting.people);
+    const totalKilometersTopDrivers = getTotalKilometersTopDrivers(topDrivers);
     const totalCostInCentsKFZ = totalKilometersTopDrivers * data.settings.centsPerKilometer;
+
     const oldPeople = data.resulting.people;
     const people = [];
     for (let i = 0; i < data.settings.crewSize; i++) {
@@ -64,8 +73,26 @@ function buildCalculationInterface(data) {
     return table;
 }
 
+function fillSummary(data) {
+    const numberOfPeople = data.settings.crewSize;
+    const topDrivers = getTopDrivers(data.settings.crewSize, data.resulting.people);
+    document.getElementById("other-count").textContent = numberOfPeople - 1;
+    document.getElementById("total-count").textContent = numberOfPeople;
+    document.getElementById("motor-vehicle-costs-0").textContent = topDrivers[0] ? `${(topDrivers[0].kilometer * data.settings.centsPerKilometer / 100).toFixed(2)} €` : "0.00€";
+    document.getElementById("motor-vehicle-costs-1").textContent = topDrivers[1] ? `${(topDrivers[1].kilometer * data.settings.centsPerKilometer / 100).toFixed(2)} €` : "0.00€";
+    document.getElementById("motor-vehicle-costs-2").textContent = topDrivers[2] ? `${(topDrivers[2].kilometer * data.settings.centsPerKilometer / 100).toFixed(2)} €` : "-";
+    document.getElementById("referee-compensation").textContent = `${data.evaluated.compensations.referee.toFixed(2)} €`;
+    document.getElementById("other-compensation").textContent = `${(data.evaluated.compensations.other * (numberOfPeople - 1)).toFixed(2)} €`;
+    document.getElementById("jugendspiel-compensation").textContent = data.settings.isJugendSpiel ? `${(data.evaluated.compensations.jugendspiel * numberOfPeople).toFixed(2)} €` : "-"
+    const totalKilometersTopDrivers = getTotalKilometersTopDrivers(topDrivers);
+    const totalCostInCentsKFZ = totalKilometersTopDrivers * data.settings.centsPerKilometer;
+    const totalAmounts = data.evaluated.compensations.referee + data.evaluated.compensations.other * (numberOfPeople - 1) + data.evaluated.compensations.jugendspiel * numberOfPeople + (totalCostInCentsKFZ / 100);
+    document.getElementById("total-sum").textContent = totalAmounts.toFixed(2);
+}
+
 function fillPage(data, calculationInterfaceContainer) {
     calculationInterfaceContainer.innerHTML = buildCalculationInterface(data);
+    fillSummary(data);
 }
 
 function activateInputs(data, calculationInterfaceContainer) {
