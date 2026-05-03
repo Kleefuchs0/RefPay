@@ -11,14 +11,14 @@ function createKilometerFields(anzahlPersonen) {
         const container = document.createElement('div');
         const label = document.createElement('label');
         label.textContent = `${bezeichnungen[i]}:`;
-        const input = document.createElement('input');
-        input.type = 'number';
-        input.placeholder = 'Kilometer';
-        input.id = `person-${i}`;
-        input.value = '';
+        const kilometerInput = document.createElement('input');
+        kilometerInput.type = 'number';
+        kilometerInput.placeholder = 'Kilometer';
+        kilometerInput.id = `person-${i}`;
+        kilometerInput.value = '';
 
         container.appendChild(label);
-        container.appendChild(input);
+        container.appendChild(kilometerInput);
         kilometerFelder.appendChild(container);
     }
 }

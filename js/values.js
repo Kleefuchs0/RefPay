@@ -1,4 +1,4 @@
-const version = "v2.7";
+const version = "v3.0";
 const dataVersion = "v2.6.1";
 const eDataVersion = "v2.7";
 const repositoryName = "RefPay";
