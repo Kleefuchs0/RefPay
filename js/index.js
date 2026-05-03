@@ -64,6 +64,10 @@ function buildCalculationInterface(data) {
     return table;
 }
 
+function fillPage(data, calculationInterfaceContainer) {
+    calculationInterfaceContainer.innerHTML = buildCalculationInterface(data);
+}
+
 function activateInputs(data, calculationInterfaceContainer) {
     for (let i = 0; i < data.settings.crewSize; i++) {
         {
@@ -100,9 +104,9 @@ function activateInputs(data, calculationInterfaceContainer) {
 function onDataUpdate(data, calculationInterfaceContainer) {
     evaluateCompensations(data);
     data.resulting.people = calculateResultingValues(data);
-    calculationInterfaceContainer.innerHTML = buildCalculationInterface(data);
+    fillPage(data, calculationInterfaceContainer);
     activateInputs(data, calculationInterfaceContainer);
-    console.log(data);
+    console.log(btoa(JSON.stringify(data)));
 }
 
 /*

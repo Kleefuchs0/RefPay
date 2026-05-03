@@ -9,9 +9,9 @@
     </head>
     <body>
         <div class="container" id="settings">
-        <div class="logo-container" id="settings">
-            <img src="assets/logo.png" class="logo"></img>
-        </div>
+            <div class="logo-container" id="settings">
+                <img src="assets/logo.png" class="logo"></img>
+            </div>
             <div class="logo-container">
 
             </div>
@@ -35,7 +35,48 @@
             <input type="number" id="cents-per-kilometer" value="35" placeholder="Cent Pro Kilometer"></input>
             <div id="calculation-interface" class="center">
             </div>
+            <div id="summary">
+                <h3>Aufwandsentschädigung</h3>
+                <div class="center">
+                <table class="kosten-tabelle">
+                    <tr>
+                        <td>Referee</td>
+                        <td id="referee-entschaedigung">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Schiedsrichter (Anzahl: <span id="andere-sr-anzahl">0</span>)</td>
+                        <td id="andere-entschaedigung">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 1</td>
+                        <td id="auto1-kosten">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 2</td>
+                        <td id="auto2-kosten">0.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>KFZ 3</td>
+                        <td id="auto3-kosten">-</td>
+                    </tr>
+                    <tr>
+                        <td>Jugendspiel Schiedsrichter (Anzahl: <span id="gesamt-sr-anzahl">0</span>)</td>
+                        <td id="jugendspiel-entschaedigung">-</td>
+                    </tr>
+                    <tr class="gesamtzeile">
+                        <td><strong>Gesamtbetrag</strong></td>
+                        <td id="gesamtbetrag">0.00 €</td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+            <div class="container-footer" name="imprint">
+                <a href="imprint.html" id="impressum-link">Impressum</a>
+                <span class="version" id="version">RefPay v0.0</span>
+            </div>
         </div>
+        <script src="js/values.js"></script>
+        <script src="js/insertVersion.js"></script>
         <script src="js/crewDesignations.js"></script>
         <script src="js/index.js"></script>
     </body>

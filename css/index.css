@@ -17,14 +17,14 @@ label {
     margin-bottom: 20px;
 }
 
-#calculations-table th, #calculations-table td {
+th, td {
     border: 1px solid #444;
     padding: 8px;
     text-align: left;
     color: #e0e0e0;
 }
 
-#calculations-table th {
+th {
     background-color: #333;
 }
 
@@ -37,4 +37,10 @@ label {
 .checkbox-label input {
     width: auto;
     margin-right: 10px;
+}
+
+#summary h3 {
+    color: #df5500;
+    margin-bottom: 10px;
+    text-align: center;
 }

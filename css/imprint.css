@@ -1,0 +1,27 @@
+/* Impressumsseite */
+#impressum-page {
+    max-width: 600px;
+}
+
+.impressum-content {
+    padding: 20px;
+}
+
+.impressum-content h2 {
+    color: #df5500;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.impressum-content h3 {
+    color: #e0e0e0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.impressum-content p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
