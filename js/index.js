@@ -26,6 +26,7 @@ function getTotalKilometersTopDrivers(topDrivers) {
 }
 
 function calculateResultingValues(data) {
+    // Calculates the motor-vehicle costs of the two vehicles which drive the furthest distance.
     const totalDrivenKilometers = data.resulting.people.reduce((sum, person) => sum + person.kilometer, 0);
     const topDrivers = getTopDrivers(data.settings.crewSize, data.resulting.people);
     const totalKilometersTopDrivers = getTotalKilometersTopDrivers(topDrivers);
@@ -40,7 +41,7 @@ function calculateResultingValues(data) {
             name: oldPeople[i] ? oldPeople[i].name : "",
             departurePoint: oldPeople[i] ? oldPeople[i].departurePoint : "",
             kilometer,
-            carCompensation: totalDrivenKilometers ? (kilometer / totalDrivenKilometers) * 100 * totalCostInCentsKFZ / 10000 : 0,
+            motorVehicleCompensation: totalDrivenKilometers ? (kilometer / totalDrivenKilometers) * 100 * totalCostInCentsKFZ / 10000 : 0,
             compensation: i == 0 /*If Referee*/ ? data.evaluated.compensations.jugendspiel + data.evaluated.compensations.referee : data.evaluated.compensations.jugendspiel + data.evaluated.compensations.other,
         })
     }
@@ -64,7 +65,7 @@ function buildCalculationInterface(data) {
                 <td><input type="text" id="departurePoint-${index}" value="${person.departurePoint}"></input></td>
                 <td>${crewDesignations[data.settings.crewSize][index]}</td>
                 <td><input type="number" id="kilometer-${index}" value="${person.kilometer}"></input></td>
-                <td>${person.carCompensation.toFixed(2)} €</td>
+                <td>${person.motorVehicleCompensation.toFixed(2)} €</td>
                 <td>${person.compensation} €</td>
             </tr>
         `).join('')}
@@ -133,7 +134,6 @@ function onDataUpdate(data, calculationInterfaceContainer) {
     data.resulting.people = calculateResultingValues(data);
     fillPage(data, calculationInterfaceContainer);
     activateInputs(data, calculationInterfaceContainer);
-    console.log(btoa(JSON.stringify(data)));
 }
 
 /*
@@ -146,7 +146,10 @@ function main() {
     const centsPerKilometerInput = document.getElementById("cents-per-kilometer");
     const calculationInterfaceContainer = document.getElementById("calculation-interface");
 
-    const data = {
+    const params = new URLSearchParams(window.location.search);
+    const vsData = params.get("d");
+
+    const data = vsData ? getDataFromVersionSpecificData(JSON.parse(vsData)) : {
         settings: {
             crewSize: crewSizeSelector.value,
             scenario: scenarioSelector.value,
@@ -161,7 +164,6 @@ function main() {
             },
         },
         resulting: {
-            motorVehicles: [],
             people: [],
         }
     };
@@ -185,6 +187,16 @@ function main() {
     centsPerKilometerInput.addEventListener("change", function() {
         data.settings.centsPerKilometer = centsPerKilometerInput.value;
         onDataUpdate(data, calculationInterfaceContainer);
+    });
+
+    // Add Copy-To-Clipboard:
+    document.getElementById("copy-to-clipboard").addEventListener("click", function() {
+        const vsData = createVersionSpecificDataFromData(dataVersion, data);
+        const params = new URLSearchParams();
+        params.append("d", JSON.stringify(vsData));
+        const origin = window.location.origin.replace(domain, domain + "/" + repositoryName);           // Only replaces it when hosted on github pages. So I can still localy debug
+        const url = origin + "?" + params.toString();
+        copyTextToClipboard(url);
     });
 }
 
