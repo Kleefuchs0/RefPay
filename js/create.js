@@ -52,6 +52,35 @@ function onAffectedDataUpdate(data, editableInterfaceContainer) {
     activateInputs(data, editableInterfaceContainer);
 }
 
+function createPDF(data) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+    });
+    const tableHeaders = ["Name", "Position", "Abfahrtsort", "Kilometer", "Fahrtkosten", "Pauschale", "Unterschrift"];
+    const tableData = function() {
+        const tempTableData = [];
+        for (let i = 0; i < data.resulting.people.length; i++) {
+            const person = data.resulting.people[i];
+            tempTableData.push({
+                Name: person.name ? person.name.toString(): "\t",
+                Position: crewDesignations[data.settings.crewSize][person.id],
+                Abfahrtsort: person.departurePoint ? person.departurePoint.toString() : "\t",
+                Kilometer: person.kilometer.toString(),
+                Fahrtkosten: `${person.motorVehicleCompensation.toFixed(2)} €`,
+                Pauschale: `${person.compensation.toFixed(2)} €`,
+                Unterschrift: "\t"
+            });
+        }
+        return tempTableData;
+    }();
+    console.log(tableData);
+    doc.table(10, 10, tableData, tableHeaders, { autoSize: true, printHeaders: true, fontSize: 8});
+    return doc;
+}
+
 function main() {
     const params = new URLSearchParams(location.search);
     const vsdata = JSON.parse(params.get("d"));
@@ -90,6 +119,11 @@ function main() {
         const vsData = createVersionSpecificDataFromData(dataVersion, data);
         const url = createDataFilledUrl("", vsData, domain, repositoryName);
         location.href = url;
+    });
+
+    document.getElementById("export").addEventListener("click", function() {
+        const pdf = createPDF(data);
+        pdf.save("quittung.pdf");
     });
 }
 
