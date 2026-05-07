@@ -1,31 +1,7 @@
 
-select, input {
-    padding: 5px;
-    margin-bottom: 3px;
-}
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #e0e0e0;
-}
-
-#calculations-table table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-th, td {
-    border: 1px solid #444;
-    padding: 8px;
-    text-align: left;
-    color: #e0e0e0;
-}
-
-th {
-    background-color: #333;
+#calculation-interface {
+    margin-top: 5%;
 }
 
 .checkbox-label {
