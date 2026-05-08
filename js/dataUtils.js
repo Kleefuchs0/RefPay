@@ -20,6 +20,15 @@ function createVersionSpecificDataFromData(dataVersion, data) {
                         c: person.compensation
                     };
                 })
+            },
+            g: {
+                l: data.game.league,
+                t: {
+                    h: data.game.teams.home,
+                    g: data.game.teams.guest
+                },
+                s: data.game.stadium,
+                d: data.game.datetime
             }
         }))
     }
@@ -54,6 +63,15 @@ function getDataFromVersionSpecificData(vsData) {
                             compensation: person.c
                         }
                     })
+                },
+                game: {
+                    league: ed.g.l,
+                    teams: {
+                        home: ed.g.t.h,
+                        guest: ed.g.t.g
+                    },
+                    stadium: ed.g.s,
+                    datetime: ed.g.d
                 }
             }
     }

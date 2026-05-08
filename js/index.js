@@ -50,10 +50,8 @@ function calculateResultingValues(data) {
 
 function buildCalculationInterface(data) {
     const table = `
-        <table id="calculations-table">
+        <table class="editable-table" id="calculations-table">
         <tr>
-            <th>Name</th>
-            <th>Abfahrtort</th>
             <th>Position</th>
             <th>Kilometer</th>
             <th>KFZ-Erstattung</th>
@@ -61,8 +59,6 @@ function buildCalculationInterface(data) {
         </tr>
         ${data.resulting.people.map((person, index) => `
             <tr>
-                <td><input type="text" id="name-${index}" value="${person.name}"></input></td>
-                <td><input type="text" id="departurePoint-${index}" value="${person.departurePoint}"></input></td>
                 <td>${crewDesignations[data.settings.crewSize][index]}</td>
                 <td><input type="number" id="kilometer-${index}" value="${person.kilometer}"></input></td>
                 <td>${person.motorVehicleCompensation.toFixed(2)} €</td>
@@ -102,34 +98,15 @@ function activateInputs(data, calculationInterfaceContainer) {
             const kilometerInputI = document.getElementById(`kilometer-${i}`);
             const kilometerListenerI = function() {
                 data.resulting.people[i].kilometer = parseInt(kilometerInputI.value);
-                onDataUpdate(data, calculationInterfaceContainer);
+                onAffectedDataUpdate(data, calculationInterfaceContainer);
             }
             kilometerInputI.removeEventListener("change", kilometerListenerI);
             kilometerInputI.addEventListener("change", kilometerListenerI);
         }
-
-        {
-            const nameInputI = document.getElementById(`name-${i}`);
-            const nameListenerI = function() {
-                data.resulting.people[i].name = nameInputI.value;
-                onDataUpdate(data, calculationInterfaceContainer);
-            }
-            nameInputI.removeEventListener("change", nameListenerI);
-            nameInputI.addEventListener("change", nameListenerI);
-        }
-        {
-            const departurePointI = document.getElementById(`departurePoint-${i}`);
-            const departurePointListenerI = function() {
-                data.resulting.people[i].departurePoint = departurePointI.value;
-                onDataUpdate(data, calculationInterfaceContainer);
-            }
-            departurePointI.removeEventListener("change", departurePointListenerI);
-            departurePointI.addEventListener("change", departurePointListenerI);
-        }
     }
 }
 
-function onDataUpdate(data, calculationInterfaceContainer) {
+function onAffectedDataUpdate(data, calculationInterfaceContainer) {
     evaluateCompensations(data);
     data.resulting.people = calculateResultingValues(data);
     fillPage(data, calculationInterfaceContainer);
@@ -165,38 +142,51 @@ function main() {
         },
         resulting: {
             people: [],
+        },
+        game: {
+            league: "",
+            teams: {
+                home: "",
+                guest: ""
+            },
+            stadium: "",
+            datetime: new Date()
         }
     };
-    onDataUpdate(data, calculationInterfaceContainer);
+    onAffectedDataUpdate(data, calculationInterfaceContainer);
 
     crewSizeSelector.addEventListener("change", function() {
         data.settings.crewSize = crewSizeSelector.value;
-        onDataUpdate(data, calculationInterfaceContainer);
+        onAffectedDataUpdate(data, calculationInterfaceContainer);
     });
 
     scenarioSelector.addEventListener("change", function() {
         data.settings.scenario = scenarioSelector.value;
-        onDataUpdate(data, calculationInterfaceContainer);
+        onAffectedDataUpdate(data, calculationInterfaceContainer);
     });
 
     isJugendSpielCheckbox.addEventListener("change", function() {
         data.settings.isJugendSpiel = isJugendSpielCheckbox.checked;
-        onDataUpdate(data, calculationInterfaceContainer);
+        onAffectedDataUpdate(data, calculationInterfaceContainer);
     });
 
     centsPerKilometerInput.addEventListener("change", function() {
         data.settings.centsPerKilometer = centsPerKilometerInput.value;
-        onDataUpdate(data, calculationInterfaceContainer);
+        onAffectedDataUpdate(data, calculationInterfaceContainer);
     });
 
     // Add Copy-To-Clipboard:
     document.getElementById("copy-to-clipboard").addEventListener("click", function() {
         const vsData = createVersionSpecificDataFromData(dataVersion, data);
-        const params = new URLSearchParams();
-        params.append("d", JSON.stringify(vsData));
-        const origin = window.location.origin.replace(domain, domain + "/" + repositoryName);           // Only replaces it when hosted on github pages. So I can still localy debug
-        const url = origin + "?" + params.toString();
+        const url = createDataFilledUrl("", vsData, domain, repositoryName);
         copyTextToClipboard(url);
+    });
+
+    // Add Create-Schiedrichterquitting:
+    document.getElementById("create-schiedrichterquittung").addEventListener("click", function() {
+        const vsData = createVersionSpecificDataFromData(dataVersion, data);
+        const url = createDataFilledUrl("create.html", vsData, domain, repositoryName);
+        location.href = url;
     });
 }
 
