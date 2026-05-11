@@ -16,15 +16,6 @@ function evaluateCompensations(data) {
     data.evaluated.compensations.jugendspiel = data.settings.isJugendSpiel ? 25 : 0;
 }
 
-function getTopDrivers(crewSize, people) {
-    const carCount = (crewSize <= 5) ? 2 : 3;
-    return [...people].sort((a, b) => b.kilometer - a.kilometer).slice(0, carCount);
-}
-
-function getTotalKilometersTopDrivers(topDrivers) {
-    return topDrivers.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-}
-
 function calculateResultingValues(data) {
     // Calculates the motor-vehicle costs of the two vehicles which drive the furthest distance.
     const totalDrivenKilometers = data.resulting.people.reduce((sum, person) => sum + person.kilometer, 0);
