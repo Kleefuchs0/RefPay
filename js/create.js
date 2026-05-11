@@ -77,7 +77,7 @@ function createPDF(data) {
         return tempTableData;
     }();
     console.log(tableData);
-    doc.table(10, 10, tableData, tableHeaders, { autoSize: true, printHeaders: true, fontSize: 8});
+    doc.table(10, 40, tableData, tableHeaders, { autoSize: true, printHeaders: true, fontSize: 8});
 
     tableHeaders = [ "Referee", `Schiedsrichter`, "KFZ-1", "KFZ-2", "KFZ-3", "Jugendspiel", "Gesamtbetrag"];
 
@@ -96,7 +96,7 @@ function createPDF(data) {
     }];
     console.log(tableData);
 
-    doc.table(10, data.settings.crewSize * 14, tableData, tableHeaders, { autoSize: true, printHeaders: true, fontSize: 8});
+    doc.table(10, 40 + data.settings.crewSize * 14, tableData, tableHeaders, { autoSize: true, printHeaders: true, fontSize: 8});
 
     return doc;
 }
