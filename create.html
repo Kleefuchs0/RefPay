@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RefPay</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/create.css">
+    </head>
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo", src="assets/logo.png" alt="RefPay Logo">
+        </div>
+
+        <div id="game-data">
+            <label for="league">Liga/Nr.:</label>
+            <input id="league" type="text" placeholder="Liga/Nr."></input>
+
+            <label for="team-home">Heim:</label>
+            <input id="team-home" type="text" placeholder="Heim"></input>
+
+            <label for="team-guest">Gast:</label>
+            <input id="team-guest" type="text" placeholder="Gast"></input>
+
+            <label for="stadium">Stadium:</label>
+            <input id="stadium" type="text" placeholder="Stadium"></input>
+
+            <label for="datetime">Datum:</label>
+            <input id="datetime" type="datetime-local" placeholder="Datum"></input>
+        </div>
+
+        <div id="editable-interface" class="center"></div>
+
+        <button id="return">Zurück</button>
+        <button id="export">Export als PDF</button>
+        <div class="container-footer" name="imprint">
+            <a href="imprint.html" id="impressum-link">Impressum</a>
+            <span class="version" id="version">RefPay v0.0</span>
+        </div>
+    </div>
+    <script src="js/crewDesignations.js"></script>
+    <script src="js/urlUtils.js"></script>
+    <script src="js/dataUtils.js"></script>
+    <script src="js/topDriverUtils.js"></script>
+    <script src="js/values.js"></script>
+    <script src="js/insertVersion.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="js/create.js"></script>
+</html>

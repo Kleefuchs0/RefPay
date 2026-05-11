@@ -9,6 +9,13 @@ function createVersionSpecificDataFromData(dataVersion, data) {
                 iJ: data.settings.isJugendSpiel,
                 cpk: data.settings.centsPerKilometer,
             },
+            e: {
+                c: {
+                    r: data.evaluated.compensations.referee,
+                    o: data.evaluated.compensations.other,
+                    j: data.evaluated.compensations.jugendspiel,
+                },
+            },
             r: {
                 p: data.resulting.people.map((person) => {
                     return {
@@ -20,6 +27,15 @@ function createVersionSpecificDataFromData(dataVersion, data) {
                         c: person.compensation
                     };
                 })
+            },
+            g: {
+                l: data.game.league,
+                t: {
+                    h: data.game.teams.home,
+                    g: data.game.teams.guest
+                },
+                s: data.game.stadium,
+                d: data.game.datetime
             }
         }))
     }
@@ -38,9 +54,9 @@ function getDataFromVersionSpecificData(vsData) {
                 },
                 evaluated: {
                     compensations: {
-                        refeere: 0,
-                        other: 0,
-                        jugendSpiel: 0
+                        referee: ed.e.c.r,
+                        other: ed.e.c.o,
+                        jugendspiel: ed.e.c.j
                     }
                 },
                 resulting: {
@@ -54,6 +70,15 @@ function getDataFromVersionSpecificData(vsData) {
                             compensation: person.c
                         }
                     })
+                },
+                game: {
+                    league: ed.g.l,
+                    teams: {
+                        home: ed.g.t.h,
+                        guest: ed.g.t.g
+                    },
+                    stadium: ed.g.s,
+                    datetime: ed.g.d
                 }
             }
     }
