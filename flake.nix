@@ -12,20 +12,20 @@
       self,
       nixpkgs,
       flake-utils,
+      ...
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           system = system;
         };
       in
       {
-        devShells.${system}.default = pkgs.mkShell {
+        devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            vscode-html-languageserver
+            vscode-langservers-extracted
             live-server
-            tsserver
+            typescript-language-server
           ];
         };
       }
