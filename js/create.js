@@ -81,18 +81,15 @@ function createPDF(data) {
 
     tableHeaders = [ "Referee", `Schiedsrichter`, "KFZ-1", "KFZ-2", "KFZ-3", "Jugendspiel", "Gesamtbetrag"];
 
-    const topDrivers = getTopDrivers(data.settings.crewSize, data.resulting.people);
-    const totalKilometersTopDrivers = getTotalKilometersTopDrivers(topDrivers);
-    const totalCostInCentsKFZ = totalKilometersTopDrivers * data.settings.centsPerKilometer;
-    const totalAmounts = data.evaluated.compensations.referee + data.evaluated.compensations.other * (data.settings.crewSize - 1) + data.evaluated.compensations.jugendspiel * data.settings.crewSize; + (totalCostInCentsKFZ / 100);
+    const summaryData = generateSummary(data);
     tableData = [{
-        Referee: data.evaluated.compensations.referee.toString(),
-        Schiedsrichter: (data.evaluated.compensations.other * (data.settings.crewSize - 1)).toString(),
-        "KFZ-1": topDrivers[0] ? `${(topDrivers[0].kilometer * data.settings.centsPerKilometer / 100).toFixed(2) } €` : "0.00€",
-        "KFZ-2": topDrivers[1] ? `${(topDrivers[1].kilometer * data.settings.centsPerKilometer / 100).toFixed(2)} €` : "0.00€",
-        "KFZ-3": topDrivers[2] ? `${ (topDrivers[2].kilometer * data.settings.centsPerKilometer / 100).toFixed(2)} €` : "-",
-        Jugendspiel: `${(data.evaluated.compensations.jugendspiel * data.settings.crewSize)} €`,
-        Gesamtbetrag: `${totalAmounts} €`
+        Referee: summaryData.referee.compensation.toString(),
+        Schiedsrichter: summaryData.other.compensation.toString(),
+        "KFZ-1": summaryData.motorVehicleCompensations[0] ? `${summaryData.motorVehicleCompensations[0]} €` : "0.00€",
+        "KFZ-2": summaryData.motorVehicleCompensations[1] ? `${summaryData.motorVehicleCompensations[1]} €` : "0.00€",
+        "KFZ-3": summaryData.motorVehicleCompensations[2] ? `${summaryData.motorVehicleCompensations[2]} €` : "-",
+        Jugendspiel: `${summaryData.jugendspiel.compensation} €`,
+        Gesamtbetrag: `${summaryData.totalCosts} €`
     }];
     console.log(tableData);
 
