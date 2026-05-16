@@ -61,45 +61,13 @@ function buildCalculationInterface(data) {
     return table;
 }
 
-function generateSummary(data) {
-    const topDrivers = getTopDrivers(data.settings.crewSize, data.resulting.people);
-    const other = {
-        compensation: data.evaluated.compensations.other * (data.settings.crewSize - 1),
-        count: data.settings.crewSize - 1,
-    };
-    const referee = {
-        compensation: data.evaluated.compensations.referee,
-        count: 1,
-    }
-    const jugendspiel = {
-        compensation: data.evaluated.compensations.jugendspiel * (data.settings.crewSize),
-        count: data.settings.crewSize
-    };
-    const totalKilometersTopDrivers = getTotalKilometersTopDrivers(topDrivers);
-
-    const totalCostInCentsKFZ = totalKilometersTopDrivers * data.settings.centsPerKilometer;
-    const totalCosts = referee.compensation + other.compensation + jugendspiel.compensation + (totalCostInCentsKFZ / 100);
-    const summaryData = {
-        topDrivers,
-        totalKilometersTopDrivers,
-        totalCostKFZ: totalCostInCentsKFZ / 100,
-        totalCosts,
-        motorVehicleCompensations: topDrivers.map((driver) => driver.kilometer * data.settings.centsPerKilometer / 100),
-        other,
-        referee,
-        jugendspiel 
-    };
-
-    return summaryData;
-}
-
 function fillSummary(data) {
     const summaryData = generateSummary(data);
     document.getElementById("other-count").textContent = summaryData.other.count;
     document.getElementById("total-count").textContent = summaryData.other.count + summaryData.referee.count;
     document.getElementById("motor-vehicle-costs-0").textContent = summaryData.motorVehicleCompensations[0] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "0.00€";
-    document.getElementById("motor-vehicle-costs-1").textContent = summaryData.motorVehicleCompensations[1] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "0.00€";
-    document.getElementById("motor-vehicle-costs-2").textContent = summaryData.motorVehicleCompensations[2] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "-";
+    document.getElementById("motor-vehicle-costs-1").textContent = summaryData.motorVehicleCompensations[1] ? `${summaryData.motorVehicleCompensations[1].toFixed(2)} €` : "0.00€";
+    document.getElementById("motor-vehicle-costs-2").textContent = summaryData.motorVehicleCompensations[2] ? `${summaryData.motorVehicleCompensations[2].toFixed(2)} €` : "-";
     document.getElementById("referee-compensation").textContent = `${summaryData.referee.compensation.toFixed(2)} €`;
     document.getElementById("other-compensation").textContent = `${summaryData.other.compensation.toFixed(2)} €`;
     document.getElementById("jugendspiel-compensation").textContent = summaryData.jugendspiel.compensation ? `${summaryData.jugendspiel.compensation.toFixed(2)} €` : "-";
