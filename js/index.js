@@ -98,8 +98,8 @@ function fillSummary(data) {
     document.getElementById("other-count").textContent = summaryData.other.count;
     document.getElementById("total-count").textContent = summaryData.other.count + summaryData.referee.count;
     document.getElementById("motor-vehicle-costs-0").textContent = summaryData.motorVehicleCompensations[0] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "0.00€";
-    document.getElementById("motor-vehicle-costs-1").textContent = summaryData.motorVehicleCompensations[1] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "0.00€";
-    document.getElementById("motor-vehicle-costs-2").textContent = summaryData.motorVehicleCompensations[2] ? `${summaryData.motorVehicleCompensations[0].toFixed(2)} €` : "-";
+    document.getElementById("motor-vehicle-costs-1").textContent = summaryData.motorVehicleCompensations[1] ? `${summaryData.motorVehicleCompensations[1].toFixed(2)} €` : "0.00€";
+    document.getElementById("motor-vehicle-costs-2").textContent = summaryData.motorVehicleCompensations[2] ? `${summaryData.motorVehicleCompensations[2].toFixed(2)} €` : "-";
     document.getElementById("referee-compensation").textContent = `${summaryData.referee.compensation.toFixed(2)} €`;
     document.getElementById("other-compensation").textContent = `${summaryData.other.compensation.toFixed(2)} €`;
     document.getElementById("jugendspiel-compensation").textContent = summaryData.jugendspiel.compensation ? `${summaryData.jugendspiel.compensation.toFixed(2)} €` : "-";
